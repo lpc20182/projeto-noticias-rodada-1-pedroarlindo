@@ -23,7 +23,7 @@ class ContatoForm(forms.Form):
 class ComentarioForm(forms.Form):
     comentario = forms.CharField(widget=forms.Textarea)
 
-    def clean(self):
-        dados = super().clean()
-        comentario = dados.get('comentario')
-        return dados
+    # def clean(self):
+    #     dados = super().clean()
+    #     comentario = dados.get('comentario')
+    #     return dados
