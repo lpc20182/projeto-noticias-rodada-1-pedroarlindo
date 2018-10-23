@@ -1,9 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
-
-
 class Pessoa(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Usuário')
     nome = models.CharField('Nome', max_length=128)
@@ -37,6 +34,12 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nome
 
+class Comentario(models.Model):
+    comentario = models.CharField(max_length=128)
+
+    def __str__(self):
+        return self.comentario
+
 class Noticia(models.Model):
     class Meta:
         verbose_name = 'Notícia'
@@ -50,6 +53,7 @@ class Noticia(models.Model):
         Pessoa, on_delete=models.SET_NULL, related_name='noticias', blank=True, null=True)
     tags = models.ManyToManyField(Tag)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True, blank=True)
+    Comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.titulo

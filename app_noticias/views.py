@@ -3,9 +3,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, TemplateView, DetailView, FormView
-
-# Create your views here.
-from app_noticias.forms import ContatoForm
+from app_noticias.forms import ContatoForm, ComentarioForm
 from .models import *
 
 
@@ -24,6 +22,8 @@ class NoticiasResumoView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total'] = Noticia.objects.count()
+        context['qtd'] = Comentario.objects.count()
+        context['media'] = Comentario.objects.count()/Noticia.objects.count()
         return context
 
 
@@ -41,6 +41,15 @@ class TagDetalhesView(DetailView):
         context['noticias'] = Noticia.objects.filter(tags__in=[self.object])
         return context
 
+class ComentarioView(FormView):
+    template_name = 'app_noticias/detalhes.html'
+    form_class = ComentarioForm
+
+    def get_success_url(self):
+        return reverse('comentario_sucesso')
+
+class ComentarioSucessoView(TemplateView):
+    template_name = 'app_noticias/comentario_sucesso.html'
 
 class ContatoView(FormView):
     template_name = 'app_noticias/contato.html'

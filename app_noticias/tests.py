@@ -2,8 +2,6 @@ from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
 from .models import Noticia
 
-
-# Create your tests here.
 class NoticiaModelTest(TestCase):
     def setUp(self):
         Noticia.objects.create(titulo='Noticia X', conteudo='Conteudo')

@@ -15,6 +15,11 @@
 <div>
     {{ noticia.conteudo | linebreaks }}
 </div>
-
+<h3>Comentario</h3>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvar Comentário</button>
+</form>
 </body>
 </html>
