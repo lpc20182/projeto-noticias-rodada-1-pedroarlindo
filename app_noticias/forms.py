@@ -1,13 +1,5 @@
 from django import forms
 
-class ComentarioForm(forms.Form):
-    comentario = forms.CharField(widget=forms.Textarea)
-
-    def clean(self):
-        dados = super().clean()
-        comentario = dados.get('comentario')
-        return dados
-
 class ContatoForm(forms.Form):
     nome = forms.CharField(max_length=128, min_length=12)
     email = forms.EmailField(required=False)
@@ -25,4 +17,13 @@ class ContatoForm(forms.Form):
         for palavra in palavras:
             if palavra in mensagem.lower():
                 self.add_error('mensagem', 'Mensagem contém palavra não permitida')
+        return dados
+
+
+class ComentarioForm(forms.Form):
+    comentario = forms.CharField(widget=forms.Textarea)
+
+    def clean(self):
+        dados = super().clean()
+        comentario = dados.get('comentario')
         return dados
