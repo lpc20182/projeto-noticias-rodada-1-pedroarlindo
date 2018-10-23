@@ -53,7 +53,8 @@ class Noticia(models.Model):
         Pessoa, on_delete=models.SET_NULL, related_name='noticias', blank=True, null=True)
     tags = models.ManyToManyField(Tag)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True, blank=True)
-    Comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE, null=True, blank=True)
+    
+    comentario = models.ForeignKey(Comentario, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.titulo
